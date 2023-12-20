@@ -44,14 +44,14 @@ names(TidyDataSet)<-gsub("-freq()", "Frequency", names(TidyDataSet), ignore.case
 names(TidyDataSet)<-gsub("angle", "Angle", names(TidyDataSet))
 names(TidyDataSet)<-gsub("gravity", "Gravity", names(TidyDataSet))
 
-FinalDataSet <- TidyDataSet %>%
+FinalTinyDataSet <- TidyDataSet %>%
   group_by(subject, activity) %>%
   summarise_all(funs(mean))
-write.table(FinalDataSet, "FinalDataSet.txt", row.name=FALSE)
+write.table(FinalTinyDataSet, "FinalTinyDataSet.txt", row.name=FALSE)
 
-str(FinalDataSet)
+str(FinalTinyDataSet)
 
-FinalDataSet
+FinalTinyDataSet
 
 
 
