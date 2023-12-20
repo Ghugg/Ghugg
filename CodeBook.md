@@ -84,3 +84,65 @@ The following files are available for the train and test data. Their description
 - 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
 
 
+
+### Brief walkthrough of thought process
+### Data to variables
+
+    features <- features.txt:
+    The chosen features for this dataset are derived from the raw signals of the accelerometer and gyroscope, specifically the 3-axial signals tAcc-XYZ and tGyro-XYZ.
+
+    activities <- activity_labels.txt:
+    Enumerated are the activities conducted during the acquisition of corresponding measurements, accompanied by their respective codes (labels).
+
+    subject_test <- test/subject_test.txt:
+    Comprising observational data, this set pertains to the testing phase and involves 9 out of 30 volunteer subjects.
+
+    x_test <- test/X_test.txt:
+    This dataset encompasses recorded features from the testing phase.
+
+    y_test <- test/y_test.txt:
+    Within this dataset lie the code labels associated with the test data activities.
+
+    subject_train <- test/subject_train.txt:
+    This dataset comprises observational data from the training phase, involving 21 out of 30 volunteer subjects.
+
+    x_train <- test/X_train.txt:
+    This dataset encapsulates recorded features from the training data.
+
+    y_train <- test/y_train.txt:
+    This dataset encompasses the code labels associated with the activities in the training data.
+
+### Combines the training and test datasets into a cohesive dataset.
+
+    Create X by merging x_train and x_test using the rbind() function.
+    Generate Y by merging y_train and y_test using the rbind() function.
+    Formulate Subject by merging subject_train and subject_test using the rbind() function.
+    Construct Merged_Data by merging Subject, Y, and X using the cbind() function.
+
+### Extracts solely the measurements pertaining to the mean and standard deviation for each recorded measurement.
+
+Create TidyDataSetSet by subsetting Merged_Data, retaining only the columns: subject, code, and measurements related to the mean and standard deviation (std) for each observation.
+
+        
+### Utilizes descriptive activity names to label the activities within the dataset.
+
+Replace all numeric codes in the "code" column of TidyDataSet with the corresponding activities retrieved from the second column of the "activities" variable.
+
+
+### Apply proper labels to the dataset with descriptive variable names:
+
+    Rename the "code" column in TidyDataSet to "activities."
+    Substitute "Acc" in column names with "Accelerometer."
+    Replace "Gyro" in column names with "Gyroscope."
+    Change "BodyBody" in column names to "Body."
+    Replace "Mag" in column names with "Magnitude."
+    For names starting with "f," replace with "Frequency."
+    For names starting with "t," replace with "Time."
+
+### From the dataset in step 4, generate a second, independent tidy dataset featuring the average of each variable for each activity and each subject:
+
+    Formulate FinalDataSet by summarizing TidyDataSet, calculating the means of each variable for each activity and each subject, after grouping by subject and activity.
+    Export FinalDataSet into a file named "FinalTinyDataSet.txt."
+
+
+
